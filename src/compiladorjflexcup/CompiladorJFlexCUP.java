@@ -17,7 +17,7 @@ public class CompiladorJFlexCUP {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String arquivo = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/def_lexico.flex";
+        String arquivo = "def_lexico.flex";
         File arq = new File(arquivo);
         jflex.Main.generate(arq);
     }

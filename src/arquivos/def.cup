@@ -28,17 +28,17 @@ terminal SOMA, MULT, DIV, SUB, ATRIB, IGUAL, DIF, MAIORQ, MENORQ, MAIORI, MENORI
 non terminal ATT, EXP, QUO, FATOR, TERM2, TERM, LISTA, COMANDO, EXPL, OPREL;
 
 LISTA ::= COMANDO LISTA 
-        | COMANDO       {:System.out.println("Comando"); :};  
-COMANDO ::= ATT:tk      {:System.out.println("att");semantico(tk);:}
-        | EXPL          {:System.out.println("exp");:};
+        | COMANDO;      
+COMANDO ::= ATT     
+        | EXPL;         
 ATT ::= ID ATRIB EXP; 
 EXP ::= EXP DIV QUO | QUO;
 QUO ::= QUO MULT FATOR | FATOR;
 FATOR ::= FATOR SOMA TERM | TERM;
 TERM ::= TERM SUB TERM2 | TERM2;
-TERM2 ::= ID:n              {:System.out.println("ID:"+n);:}
-      | CONST:c         {:System.out.println("Const:"+c);:};
-EXPL ::= TERM OPREL TERM;
+TERM2 ::= ID             
+      | CONST;   
+EXPL ::= TERM2 OPREL TERM2;
 OPREL ::= IGUAL | DIF | MAIORQ | MENORQ | MAIORI | MENORI;
 
 

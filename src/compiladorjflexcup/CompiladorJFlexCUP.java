@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Scanner;
+import java_cup.runtime.ComplexSymbolFactory;
+import java_cup.runtime.ScannerBuffer;
 import java_cup.runtime.Symbol;
 
 /**
@@ -26,10 +28,10 @@ public class CompiladorJFlexCUP {
     public static void main(String[] args) throws FileNotFoundException {
         /*
         geração do léxico
-        
+       
         String arquivo = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/lex.flex";
         File arq = new File(arquivo);
-        jflex.Main.generate(arq);*/
+        jflex.Main.generate(arq);
     
     
         /*
@@ -54,11 +56,14 @@ public class CompiladorJFlexCUP {
            }    
 */    
         try{
-            FileReader arquivo = new FileReader(args[1]);
+            FileReader arquivo = new FileReader("/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/teste.txt");
+            ComplexSymbolFactory csf = new ComplexSymbolFactory();
             Lexico lex = new Lexico(arquivo);
-                    
             Parser p = new Parser(lex);
             p.parse();   
             System.out.println("Texto Correto");
-        }catch(E)
+        }catch(Exception e){
+            System.out.println("Erro: "+e.getMessage());
+        }
+    }
 }

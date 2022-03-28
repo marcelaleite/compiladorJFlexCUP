@@ -4,9 +4,12 @@ import java.io.*;
 import java_cup.runtime.*;
 import compiladorjflexcup.Lexico;
 
+action code {:  // incluir rotinas customizadas para manipular a tabela de símbolos
+            :};
+
 parser code
 {:
-    // colocar funções que serão geradas no código
+    // colocar funções customizadas que serão utilizadas pelo parser
     // exemplo - tratamento de erros sintáticos
     public void syntax_error(Symbol s){
         String strErro = "Erro de sintaxe. Linha: " + (s.right + 1) +
@@ -18,12 +21,16 @@ parser code
     public void semantico(Object tk){
        System.out.println("Semântico....");
     }
-
-
     
 :};
 
-terminal SOMA, MULT, DIV, SUB, ATRIB, IGUAL, DIF, MAIORQ, MENORQ, MAIORI, MENORI, NAO, E, OU, ID, CONST, TRUE, FALSE, IF, WHILE, ERRO;
+init with {:  // código para ser executado antes de pegar o próximo token
+              // pode ser usado para iniciar variáveis ou tabelas para o analisador semântico
+           //  scanner.init();              
+          :};
+
+
+terminal SOMA, MULT, DIV, SUB, ATRIB, IGUAL, DIF, MAIORQ, MENORQ, MAIORI, MENORI, NAO, E, OU, ID, CONST, IF,ELSE, WHILE, ERRO, APAR, FPAR, CARACTER, BOOL, INT;
 
 non terminal ATT, EXP, QUO, FATOR, TERM2, TERM, LISTA, COMANDO, EXPL, OPREL;
 

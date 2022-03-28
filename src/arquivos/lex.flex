@@ -56,7 +56,7 @@ numeros = [0-9]
 ws      = [\ |\n|\r]|[\t\f]
 id      = {letras}({letras}|{numeros})*
 const   = 0 | [1-9][0-9]*
-BoolLiteral = [true] | [false]
+BoolLiteral = true | false
 
 %state STRING
 

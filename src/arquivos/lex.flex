@@ -9,7 +9,6 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 %public
 %class Lexico
 %cup
-%function next_token
 %implements sym
 %full
 %line
@@ -53,10 +52,11 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 
 letras  = [a-zA-Z]
 numeros = [0-9]
-ws      = [\ |\n|\r]|[\t\f]
 id      = {letras}({letras}|{numeros})*
 const   = 0 | [1-9][0-9]*
 BoolLiteral = true | false
+LineTerminator = \r|\n|\r\n
+ws     = [\ ,\t,\f,\t] | {LineTerminator}
 
 %state STRING
 
@@ -66,14 +66,14 @@ BoolLiteral = true | false
 <YYINITIAL>{ /* esse parâmetros para que o flex reconheça as palavras reservadas */
 /* palavras reservadas */
 
-"int"       { return symbol("INT",INT, new Integer( INT ) ); }
+"int"       { return symbol("int",INT, new Integer( INT ) ); }
 "if"        {return symbol ("if",IF);}
 "else"      {return symbol ("else",ELSE);}
 "while"     {return symbol ("while",WHILE);}
 {BoolLiteral}   { return symbol("bool",BOOL, new Boolean(Boolean.parseBoolean(yytext()))); }
 {id}            {return symbol ("id",ID,yytext());} 
 {const}         {return symbol ("const",CONST,new Integer(Integer.parseInt(yytext())));} 
-{ws}            {/* nenhuma ação - ignorar espaços */  }
+{ws}             {/* apenas ignorar espaços */ }
 /* operadores */
 "+"         {return symbol ("soma",SOMA,SOMA,new Integer( SOMA ));}  
 "-"         {return symbol ("sub",SUB,SUB,new Integer( SUB ));} 
@@ -88,19 +88,17 @@ BoolLiteral = true | false
 "!"         {return symbol ("!",NAO,new Integer( NAO ));}
 "&"         {return symbol ("&",E,new Integer( E ));}
 "||"        {return symbol ("|",OU,new Integer( OU ));}
-"//".*      {/* ignorar comentários */}
+/* "//".*      {/* ignorar comentários */} */
 "="         {return symbol ("=",ATRIB);} 
 "("         { return symbol("(",APAR); }
 ")"         { return symbol(")",FPAR); }
 }
 
 <STRING> { /* para leitura de uma string */
-  \"                             { yybegin(YYINITIAL); 
-      return symbol("caracter",CARACTER,string.toString(),string.length()); }
+  "["                             { yybegin(STRING); return symbol("caracter",CARACTER,string.toString(),string.length()); }
   [^\n\r\"\\]+                   { string.append( yytext() ); }
   \\t                            { string.append('\t'); }
   \\n                            { string.append('\n'); }
-
   \\r                            { string.append('\r'); }
   \\\"                           { string.append('\"'); }
   \\                             { string.append('\\'); }

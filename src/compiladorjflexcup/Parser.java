@@ -152,7 +152,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     // exemplo - tratamento de erros sintáticos
     public void syntax_error(Symbol s){
         String strErro = "Erro de sintaxe. Linha: " + (s.right + 1) +
-            " Coluna: " + s.left + ". Texto: \"" + s.value + "\"" + " \n Token Encontrado: " + sym.terminalNames[s.sym] + " state " + s.parse_state;
+            " Coluna: " + s.left + ". Valor: \"" + s.value + "\"" + " \n Token Encontrado: " + sym.terminalNames[s.sym] + " state " + s.parse_state + "\n";
         
         report_error(strErro, null); 
         

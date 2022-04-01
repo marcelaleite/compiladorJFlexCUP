@@ -15,6 +15,9 @@ import java.util.Scanner;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ScannerBuffer;
 import java_cup.runtime.Symbol;
+import java_cup.runtime.SymbolFactory;
+import jflex.Main;
+import jflex.exceptions.SilentExit;
 
 /**
  *
@@ -25,45 +28,48 @@ public class CompiladorJFlexCUP {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException {
-        /*
-        geração do léxico
-       
-        String arquivo = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/lex.flex";
-        File arq = new File(arquivo);
-        jflex.Main.generate(arq);
+    public static void main(String[] args) throws SilentExit {
+        
+        // Exemplos
+        
+        // geração do analisador léxico
+        //Main.generate(args);
+        
+        // pode ser feito dessa forma ou através da interface do JFLex
     
+        
+        // usar a linha de comando abaixo para geração do parser
+        // java -jar java-cup-11b.jar -interface -parser Parser  -locations -dump -debug def.cup
+        
     
-        /*
-        para geração do parser
-        java -jar java-cup-11b.jar -interface -parser Parser def.cup
-        */
-    
-        // para testar o léxico
-/*
+        // Exemplo para testar o léxico
         try{
                Scanner tec = new Scanner(System.in);
                String s = tec.next();
                while (!s.equals("s")){
                     Reader entrada = new StringReader(s);
-                    Lexico lexico = new Lexico(entrada);
+                    ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
+                    Lexico lexico = new Lexico(entrada,symbolFactory);
                     System.out.println("Token: "+sym.terminalNames[lexico.next_token().sym]);
                     s = tec.next();
 
               }
            }catch(Exception e){
-               System.out.println("Erro na entrada");
+               System.out.println("Erro na entrada: "+e.getMessage());
            }    
-*/    
-        try{
-            FileReader arquivo = new FileReader("/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/teste.txt");
+        
+        // Exemplo para testar o parser e léxico
+        /* try{
+            Scanner tec = new Scanner(System.in);
+            String s = tec.next();
             ComplexSymbolFactory csf = new ComplexSymbolFactory();
-            Lexico lex = new Lexico(arquivo);
-            Parser p = new Parser(lex);
-            p.parse();   
-            System.out.println("Texto Correto");
+            Reader entrada = new StringReader(s);
+            Lexico lex = new Lexico(entrada,csf);
+            Parser p = new Parser(lex,csf);
+            Symbol i = p.parse();;
+            System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
         }catch(Exception e){
-            System.out.println("Erro: "+e.getMessage());
-        }
+            System.out.println("\nErro: "+e.getMessage());
+        } */
     }
 }

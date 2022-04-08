@@ -14,7 +14,6 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 %line
 %column
 %char
-/* %ignorecase */
 
 /* as funções abaixo sobrescrevem o construtor da classe Symbol para suporte de mais argumentos */
 /* mais detalhes em: http://www2.cs.tum.edu/projects/cup/examples.php */
@@ -27,19 +26,26 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
     ComplexSymbolFactory symbolFactory;
 
     private Symbol symbol(String name, int sym) {
-        return symbolFactory.newSymbol(name, sym, new Location(name,yyline+1,yycolumn+1), new Location(name,yyline+1,yycolumn+yylength()));
+        Symbol s = symbolFactory.newSymbol(name, sym, new Location(name,yyline+1,yycolumn+1), new Location(name,yyline+1,yycolumn+yylength()));
+        System.out.println(s.toString());
+        return s;
     }
 
     private Symbol symbol(String name, int sym, Object val) {
         Location left = new Location(name,yyline+1,yycolumn+1);
         Location right= new Location(name,yyline+1,yycolumn+yylength() );
-        return symbolFactory.newSymbol(name, sym, left, right,val);
+        Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
+        System.out.println(s.toString());
+        return s;
     }
     private Symbol symbol(String name, int sym, Object val,int buflength) {
         Location left = new Location(name,yyline+1,yycolumn+yylength()-buflength);
         Location right= new Location(name,yyline+1,yycolumn+yylength());
-        return symbolFactory.newSymbol(name, sym, left, right,val);
+        Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
+        System.out.println(s.toString());
+        return s;
     }
+
     private void error(String message) {
       System.out.println("Error at line "+(yyline+1)+", column "+(yycolumn+1)+" : "+message);
     }
@@ -55,8 +61,8 @@ numeros = [0-9]
 id      = {letras}({letras}|{numeros})*
 const   = 0 | [1-9][0-9]*
 BoolLiteral = true | false
-LineTerminator = \r|\n|\r\n
-ws     = [\ ,\t,\f,\t] | {LineTerminator}
+new_line = \r|\n|\r\n
+ws = {new_line} | [ \t\f]
 
 %state STRING
 
@@ -73,8 +79,9 @@ ws     = [\ ,\t,\f,\t] | {LineTerminator}
 {BoolLiteral}   { return symbol("bool",BOOL, new Boolean(Boolean.parseBoolean(yytext()))); }
 {id}            {return symbol ("id",ID,yytext());} 
 {const}         {return symbol ("const",CONST,new Integer(Integer.parseInt(yytext())));} 
-{ws}             {/* apenas ignorar espaços */ }
+{ws}             { /* ignorar */}
 /* operadores */
+ \"              { string.setLength(0); yybegin(STRING); }
 "+"         {return symbol ("soma",SOMA,SOMA,new Integer( SOMA ));}  
 "-"         {return symbol ("sub",SUB,SUB,new Integer( SUB ));} 
 "*"         {return symbol ("mult",MULT,MULT,new Integer( MULT ));}  
@@ -88,24 +95,26 @@ ws     = [\ ,\t,\f,\t] | {LineTerminator}
 "!"         {return symbol ("!",NAO,new Integer( NAO ));}
 "&"         {return symbol ("&",E,new Integer( E ));}
 "||"        {return symbol ("|",OU,new Integer( OU ));}
-/* "//".*      {/* ignorar comentários */} */
 "="         {return symbol ("=",ATRIB);} 
 "("         { return symbol("(",APAR); }
 ")"         { return symbol(")",FPAR); }
 }
 
-<STRING> { /* para leitura de uma string */
-  "["                             { yybegin(STRING); return symbol("caracter",CARACTER,string.toString(),string.length()); }
-  [^\n\r\"\\]+                   { string.append( yytext() ); }
+
+<STRING>{
+
+\" {string.setLength(0); yybegin(YYINITIAL);return symbol("str",STR,string.toString(),string.length()); }
+[^\n\r\"\\]+ {string.append(yytext());}
   \\t                            { string.append('\t'); }
   \\n                            { string.append('\n'); }
+
   \\r                            { string.append('\r'); }
   \\\"                           { string.append('\"'); }
   \\                             { string.append('\\'); }
 }
 
 /* tratamento de erros */
-[^]|\n        {  /* throw new Error("Caracter inválido <"+ yytext()+">");*/
+.|\n        {  /* throw new Error("Caracter inválido <"+ yytext()+">");*/
 		    error("Caracter inválido <"+ yytext()+">"+", na linha "+yyline+", coluna "+yycolumn);
 } 
 /* funções auxiliares */

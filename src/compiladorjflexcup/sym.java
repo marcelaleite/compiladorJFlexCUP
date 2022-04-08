@@ -22,7 +22,6 @@ public interface sym {
   public static final int ID = 16;
   public static final int ATRIB = 6;
   public static final int SUB = 5;
-  public static final int CARACTER = 24;
   public static final int E = 14;
   public static final int MENORI = 12;
   public static final int EOF = 0;
@@ -31,7 +30,9 @@ public interface sym {
   public static final int DIV = 4;
   public static final int CONST = 17;
   public static final int error = 1;
+  public static final int STR = 24;
   public static final int BOOL = 25;
+  public static final int WS = 27;
   public static final int ERRO = 21;
   public static final int SOMA = 2;
   public static final int DIF = 8;
@@ -60,9 +61,10 @@ public interface sym {
   "ERRO",
   "APAR",
   "FPAR",
-  "CARACTER",
+  "STR",
   "BOOL",
-  "INT"
+  "INT",
+  "WS"
   };
 }
 

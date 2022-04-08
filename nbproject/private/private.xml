@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/compiladorjflexcup/Lexico.java</file>
+            <file>file:/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/lex.flex</file>
+            <file>file:/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/def.cup</file>
+            <file>file:/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/compiladorjflexcup/CompiladorJFlexCUP.java</file>
+        </group>
     </open-files>
 </project-private>

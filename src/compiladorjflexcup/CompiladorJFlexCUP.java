@@ -43,7 +43,7 @@ public class CompiladorJFlexCUP {
         
     
         // Exemplo para testar o léxico
-        try{
+        /*try{
                Scanner tec = new Scanner(System.in);
                String s = tec.next();
                while (!s.equals("s")){
@@ -56,20 +56,20 @@ public class CompiladorJFlexCUP {
               }
            }catch(Exception e){
                System.out.println("Erro na entrada: "+e.getMessage());
-           }    
-        
+           }  
+        */
         // Exemplo para testar o parser e léxico
-        /* try{
+       try{
             Scanner tec = new Scanner(System.in);
             String s = tec.next();
             ComplexSymbolFactory csf = new ComplexSymbolFactory();
             Reader entrada = new StringReader(s);
             Lexico lex = new Lexico(entrada,csf);
             Parser p = new Parser(lex,csf);
-            Symbol i = p.parse();;
+            Symbol i = p.parse();
             System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
         }catch(Exception e){
             System.out.println("\nErro: "+e.getMessage());
-        } */
+        }
     }
 }

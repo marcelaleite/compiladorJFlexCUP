@@ -61,8 +61,7 @@ numeros = [0-9]
 id      = {letras}({letras}|{numeros})*
 const   = 0 | [1-9][0-9]*
 BoolLiteral = true | false
-new_line = \r|\n|\r\n
-ws = {new_line} | [ \t\f]
+ws = [ \r\n\t]+
 
 %state STRING
 
@@ -79,7 +78,7 @@ ws = {new_line} | [ \t\f]
 {BoolLiteral}   { return symbol("bool",BOOL, new Boolean(Boolean.parseBoolean(yytext()))); }
 {id}            {return symbol ("id",ID,yytext());} 
 {const}         {return symbol ("const",CONST,new Integer(Integer.parseInt(yytext())));} 
-{ws}             { /* ignorar */}
+{ws}             { /* ignorar */ }
 /* operadores */
  \"              { string.setLength(0); yybegin(STRING); }
 "+"         {return symbol ("soma",SOMA,SOMA,new Integer( SOMA ));}  

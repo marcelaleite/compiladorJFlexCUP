@@ -42,24 +42,42 @@ public class CompiladorJFlexCUP {
         // java -jar java-cup-11b.jar -interface -parser Parser  -locations -dump -debug def.cup
         
     
-        // Exemplo para testar o léxico
-        /*try{
-               Scanner tec = new Scanner(System.in);
-               String s = tec.next();
-               while (!s.equals("s")){
-                    Reader entrada = new StringReader(s);
+        // exemplo para testar léxico e parser a partir de um arquivo de teste
+        try{
+            String caminho = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/teste.txt";
+            BufferedReader bf = new BufferedReader(new FileReader(caminho));
+            ComplexSymbolFactory csf = new ComplexSymbolFactory();
+            Lexico lexico = new Lexico(bf,csf);
+            
+            Parser p = new Parser(lexico,csf);
+            Symbol i = p.parse();
+            System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
+            
+            
+           // Exemplos para testar somente o léxico
+            /*Symbol s = lexico.next_token();
+            while (s.sym > 0){
+                System.out.println("Token: "+sym.terminalNames[lexico.next_token().sym]);
+                s = lexico.next_token();
+            }*/
+            
+            /*Scanner tec = new Scanner(System.in);
+            String s = tec.next();
+            while (!s.equals("s")){
+                    Reader entrada = new StringReader("teste a 12");
                     ComplexSymbolFactory symbolFactory = new ComplexSymbolFactory();
                     Lexico lexico = new Lexico(entrada,symbolFactory);
                     System.out.println("Token: "+sym.terminalNames[lexico.next_token().sym]);
-                    s = tec.next();
 
-              }
-           }catch(Exception e){
-               System.out.println("Erro na entrada: "+e.getMessage());
-           }  
-        */
+                  s = tec.next();
+
+            }*/
+            }catch(Exception e){
+                  System.out.println("Erro na entrada: "+e.getMessage());
+            } 
+
         // Exemplo para testar o parser e léxico
-       try{
+       /*try{
             Scanner tec = new Scanner(System.in);
             String s = tec.next();
             ComplexSymbolFactory csf = new ComplexSymbolFactory();
@@ -70,6 +88,6 @@ public class CompiladorJFlexCUP {
             System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
         }catch(Exception e){
             System.out.println("\nErro: "+e.getMessage());
-        }
+        }*/
     }
 }

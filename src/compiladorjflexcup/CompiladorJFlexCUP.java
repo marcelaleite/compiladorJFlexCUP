@@ -39,8 +39,8 @@ public class CompiladorJFlexCUP {
     
         
         // usar a linha de comando abaixo para geração do parser
-        // java -jar java-cup-11b.jar -interface -parser Parser  -locations -dump -debug def.cup
-        
+        // java -jar java-cup-11b.jar -interface -parser Parser -locations def.cup
+        // para depurar acrescentar os argumentos -dump -debug
     
         // exemplo para testar léxico e parser a partir de um arquivo de teste
         try{
@@ -70,7 +70,7 @@ public class CompiladorJFlexCUP {
                     System.out.println("Token: "+sym.terminalNames[lexico.next_token().sym]);
 
                   s = tec.next();
-
+             
             }*/
             }catch(Exception e){
                   System.out.println("Erro na entrada: "+e.getMessage());

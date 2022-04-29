@@ -27,7 +27,7 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
 
     private Symbol symbol(String name, int sym) {
         Symbol s = symbolFactory.newSymbol(name, sym, new Location(name,yyline+1,yycolumn+1), new Location(name,yyline+1,yycolumn+yylength()));
-        System.out.println(s.toString());
+        //System.out.println(s.toString());
         return s;
     }
 
@@ -35,14 +35,14 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
         Location left = new Location(name,yyline+1,yycolumn+1);
         Location right= new Location(name,yyline+1,yycolumn+yylength() );
         Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
-        System.out.println(s.toString());
+        //System.out.println(s.toString());
         return s;
     }
     private Symbol symbol(String name, int sym, Object val,int buflength) {
         Location left = new Location(name,yyline+1,yycolumn+yylength()-buflength);
         Location right= new Location(name,yyline+1,yycolumn+yylength());
         Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
-        System.out.println(s.toString());
+        //System.out.println(s.toString());
         return s;
     }
 
@@ -97,6 +97,7 @@ ws = [ \r\n\t]+
 "="         {return symbol ("=",ATRIB);} 
 "("         { return symbol("(",APAR); }
 ")"         { return symbol(")",FPAR); }
+";"         { return symbol(";",PV); }
 }
 
 

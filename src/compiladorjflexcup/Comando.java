@@ -15,6 +15,7 @@ public class Comando {
     private ExpressaoLogica expressaol;
     private Atribuicao atribuicao;
     private ArrayList<Comando> ListaComandos;
+    private Variavel declaracao;
     
     public Comando(ExpressaoLogica expl){
         this.expressaol = expl;
@@ -28,5 +29,13 @@ public class Comando {
         this.ListaComandos.add(cmd);
     }
 
+        
+    public Comando(Variavel dec){
+        this.declaracao = dec;
+    }
+    
+    public Atribuicao getAtribuicao(){
+        return this.atribuicao;
+    }
     
 }

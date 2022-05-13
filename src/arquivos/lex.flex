@@ -71,11 +71,15 @@ ws = [ \r\n\t]+
 <YYINITIAL>{ /* esse parâmetros para que o flex reconheça as palavras reservadas */
 /* palavras reservadas */
 
-"int"       { return symbol("int",INT, new Integer( INT ) ); }
+"int"       {return symbol("int",INT); }
+"string"    {return symbol("string",CADEIA); }
+"bool"      {return symbol("bool",BOOL); }
 "if"        {return symbol ("if",IF);}
+"prog"      {return symbol ("prog",PROG);}
+"dec"       {return symbol ("dec",DEC);}
 "else"      {return symbol ("else",ELSE);}
 "while"     {return symbol ("while",WHILE);}
-{BoolLiteral}   { return symbol("bool",BOOL, new Boolean(Boolean.parseBoolean(yytext()))); }
+{BoolLiteral}   { return symbol("boolLiteral",BOOLLITERAL, new Boolean(Boolean.parseBoolean(yytext()))); }
 {id}            {return symbol ("id",ID,yytext());} 
 {const}         {return symbol ("const",CONST,new Integer(Integer.parseInt(yytext())));} 
 {ws}             { /* ignorar */ }
@@ -97,6 +101,8 @@ ws = [ \r\n\t]+
 "="         {return symbol ("=",ATRIB);} 
 "("         { return symbol("(",APAR); }
 ")"         { return symbol(")",FPAR); }
+"{"         { return symbol("{",INI); }
+"}"         { return symbol("}",FIM); }
 ";"         { return symbol(";",PV); }
 }
 

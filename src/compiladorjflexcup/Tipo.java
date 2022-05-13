@@ -5,20 +5,12 @@
  */
 package compiladorjflexcup;
 
-import java_cup.runtime.Symbol;
-
 /**
  *
  * @author marcela
  */
-public class Identificador {
-    private String id;
-    
-    public Identificador(Object s){
+public class Tipo {
+    private String tipo;
 
-        this.id = s.toString();
-    }
-    
-    public String getId(){ return this.id; }
     
 }

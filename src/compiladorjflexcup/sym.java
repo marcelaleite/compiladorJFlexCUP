@@ -8,33 +8,39 @@ package compiladorjflexcup;
 /** CUP generated interface containing symbol constants. */
 public interface sym {
   /* terminals */
-  public static final int FPAR = 23;
-  public static final int OU = 15;
-  public static final int ELSE = 19;
-  public static final int INT = 26;
+  public static final int FPAR = 25;
+  public static final int OU = 17;
+  public static final int ELSE = 21;
+  public static final int INT = 28;
   public static final int IGUAL = 7;
   public static final int MAIORQ = 9;
-  public static final int WHILE = 20;
-  public static final int APAR = 22;
+  public static final int WHILE = 22;
+  public static final int APAR = 24;
   public static final int MAIORI = 11;
-  public static final int IF = 18;
+  public static final int IF = 20;
   public static final int MENORQ = 10;
-  public static final int PV = 27;
-  public static final int ID = 16;
+  public static final int INI = 31;
+  public static final int PV = 29;
+  public static final int ID = 18;
   public static final int ATRIB = 6;
+  public static final int CADEIA = 14;
   public static final int SUB = 5;
-  public static final int E = 14;
+  public static final int E = 16;
   public static final int MENORI = 12;
   public static final int EOF = 0;
   public static final int MULT = 3;
-  public static final int NAO = 13;
+  public static final int NAO = 15;
   public static final int DIV = 4;
-  public static final int CONST = 17;
+  public static final int PROG = 30;
+  public static final int DEC = 33;
+  public static final int BOOLLITERAL = 13;
+  public static final int CONST = 19;
   public static final int error = 1;
-  public static final int STR = 24;
-  public static final int BOOL = 25;
-  public static final int ERRO = 21;
+  public static final int STR = 26;
+  public static final int BOOL = 27;
+  public static final int ERRO = 23;
   public static final int SOMA = 2;
+  public static final int FIM = 32;
   public static final int DIF = 8;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -50,6 +56,8 @@ public interface sym {
   "MENORQ",
   "MAIORI",
   "MENORI",
+  "BOOLLITERAL",
+  "CADEIA",
   "NAO",
   "E",
   "OU",
@@ -64,7 +72,11 @@ public interface sym {
   "STR",
   "BOOL",
   "INT",
-  "PV"
+  "PV",
+  "PROG",
+  "INI",
+  "FIM",
+  "DEC"
   };
 }
 

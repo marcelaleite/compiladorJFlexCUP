@@ -14,8 +14,19 @@ import java.util.ArrayList;
 public class Programa {
     private ArrayList<Comando> lista;
     
-    public Programa(ArrayList<Comando> lst){
+    public void setLista(ArrayList<Comando> lst){
         this.lista = lst;
     }
+    
+    public void imprime(){
+        Comando c = this.lista.get(0);
+        System.out.println(c.getAtribuicao().getId().getId());
+        
+        
+    
+    }
+ 
+    
+    
     
 }

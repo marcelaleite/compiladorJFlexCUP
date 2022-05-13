@@ -9,17 +9,11 @@ package compiladorjflexcup;
  *
  * @author marcela
  */
-public class Atribuicao {
-    private Identificador id;
-    private Expressao expressao;
+public class Variavel {
+    private String nomevar;
+    private Tipo tipo;
     
-    public Atribuicao(Identificador i, Expressao e){
-        this.id = i;
-        this.expressao = e;
+    public Variavel(Object var,Tipo t){
     }
     
-    public Identificador getId(){
-        return this.id;
-    }
-
 }

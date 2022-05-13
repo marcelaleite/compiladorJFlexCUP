@@ -10,10 +10,11 @@ package compiladorjflexcup;
  * @author marcela
  */
 public class Str {
-    private String palavra;
-    
+    private String s;
     public Str(Object s){
-        this.palavra = s.toString();
+        this.s = s.toString();
+    
     }
+    
     
 }

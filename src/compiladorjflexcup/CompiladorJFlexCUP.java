@@ -33,7 +33,7 @@ public class CompiladorJFlexCUP {
         // Exemplos
         
         // geração do analisador léxico
-        //Main.generate(args);
+        // Main.generate(args);
         
         // pode ser feito dessa forma ou através da interface do JFLex
     
@@ -51,6 +51,9 @@ public class CompiladorJFlexCUP {
             
             Parser p = new Parser(lexico,csf);
             Symbol i = p.parse();
+            Programa prog = (Programa)i.value;
+            prog.imprime();
+            System.out.println("\n---\n");
             System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
             
             

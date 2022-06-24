@@ -19,7 +19,6 @@ parser code
     public void syntax_error(Symbol s){
         String strErro = "Erro de sintaxe. Linha: " + (s.right + 1) +
             " Coluna: " + s.left + ". Valor: \"" + s.value + "\"" + " \n Token Encontrado: " + sym.terminalNames[s.sym] + " state " + s.parse_state + "\n";
-        
         report_error(strErro, null); 
         
     }
@@ -83,7 +82,7 @@ TERM ::= TERM:term SUB:sub TERM2:term2    {: RESULT = new Expressao(term,sub,ter
 TERM2 ::= ID:i                            {: RESULT = new Termo(new Identificador(i)); :}
       | CONST:c                           {: RESULT = new Termo(new Constante(c));     :}
       | STR:s                             {: RESULT = new Termo(new Str(s));           :}
-      | BOOLLITERAL                       {: RESULT = new Termo(new Bool(s));
+      | BOOLLITERAL:b                     {: RESULT = new Termo(new Bool(b));          :}
       ;
 EXPL ::= TERM2:t1 OPREL:op TERM2:t2       {: RESULT = new ExpressaoLogica(t1,op,t2);   :}  
        ;

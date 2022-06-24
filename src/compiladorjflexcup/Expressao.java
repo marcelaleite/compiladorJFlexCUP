@@ -40,6 +40,48 @@ public class Expressao implements sym{
         this.termoE = t;     
     }
     
+    public void imprime(){
+        if (this.termoE != null)
+            System.out.println(this.termoE.getStr());
+        if (this.termoD != null)
+            System.out.println(this.termoD.getStr());
+        if (this.esq != null){
+            if (this.esq.getTermoE() != null)
+                System.out.println(this.esq.getTermoE().getStr());
+            if(this.esq.getEsq() != null){
+                if (this.esq.getEsq().getTermoE() != null)
+                    System.out.println(this.esq.getEsq().getTermoE().getStr());
+                if (this.esq.getEsq().getEsq() != null)
+                    if (this.esq.getEsq().getEsq().getTermoE() != null)
+                        System.out.println(this.esq.getEsq().getEsq().getTermoE().getStr().getS());
+
+                    
+            }
+
+        }
+
+    }
+
+    public Expressao getEsq() {
+        return esq;
+    }
+
+    public Expressao getDir() {
+        return dir;
+    }
+
+    public int getOp() {
+        return op;
+    }
+
+    public Termo getTermoE() {
+        return termoE;
+    }
+
+    public Termo getTermoD() {
+        return termoD;
+    }
+    
   
     
     

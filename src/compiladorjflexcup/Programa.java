@@ -25,6 +25,8 @@ public class Programa {
         
     
     }
+    
+    public ArrayList<Comando> getLista(){ return this.lista; }
  
     
     

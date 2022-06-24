@@ -4,6 +4,7 @@
 
 /*incluir o pacote onde a classe será criada*/
 package compiladorjflexcup;
+import compiladorjflexcup.sym; /* essa classe será criada pelo CUP */
 import java_cup.runtime.Symbol;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ComplexSymbolFactory.Location;
@@ -319,7 +320,9 @@ public class Lexico implements java_cup.runtime.Scanner, sym {
         Location left = new Location(name,yyline+1,yycolumn+yylength()-buflength);
         Location right= new Location(name,yyline+1,yycolumn+yylength());
         Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
-        //System.out.println(s.toString());
+        System.out.println(s.toString());     
+        System.out.println("valor: "+val.toString());
+
         return s;
     }
 
@@ -837,7 +840,7 @@ public class Lexico implements java_cup.runtime.Scanner, sym {
             // fall through
           case 60: break;
           case 21:
-            { string.setLength(0); yybegin(YYINITIAL);return symbol("str",STR,string.toString(),string.length());
+            { yybegin(YYINITIAL);System.out.println("str: "+string.toString()); return symbol("str",STR,string.toString(),string.length());
             }
             // fall through
           case 61: break;

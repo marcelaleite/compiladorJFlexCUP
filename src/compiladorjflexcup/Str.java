@@ -15,6 +15,7 @@ public class Str {
         this.s = s.toString();
     
     }
+    public String getS() {return this.s;}
     
     
 }

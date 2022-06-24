@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Iterator;
 import java.util.Scanner;
 import java_cup.runtime.ComplexSymbolFactory;
 import java_cup.runtime.ScannerBuffer;
@@ -28,12 +29,12 @@ public class CompiladorJFlexCUP {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SilentExit {
+    public static void main(String[] args) throws SilentExit, Exception {
         
         // Exemplos
         
         // geração do analisador léxico
-        // Main.generate(args);
+        //Main.generate(args);
         
         // pode ser feito dessa forma ou através da interface do JFLex
     
@@ -43,17 +44,20 @@ public class CompiladorJFlexCUP {
         // para depurar acrescentar os argumentos -dump -debug
     
         // exemplo para testar léxico e parser a partir de um arquivo de teste
-        try{
-            String caminho = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/teste.txt";
-            BufferedReader bf = new BufferedReader(new FileReader(caminho));
-            ComplexSymbolFactory csf = new ComplexSymbolFactory();
-            Lexico lexico = new Lexico(bf,csf);
+ 
+        String caminho = "/home/marcela/NetBeansProjects/compiladorJFlexCUP/src/arquivos/teste.txt";
+        BufferedReader bf = new BufferedReader(new FileReader(caminho));
+        ComplexSymbolFactory csf = new ComplexSymbolFactory();
+        Lexico lexico = new Lexico(bf,csf);
             
-            Parser p = new Parser(lexico,csf);
+        Parser p = new Parser(lexico,csf);
+        try{
+
             Symbol i = p.parse();
             Programa prog = (Programa)i.value;
             prog.imprime();
-            System.out.println("\n---\n");
+            Comando c  = prog.getLista().get(0);
+            c.getAtribuicao().getExpressao().imprime();
             System.out.println("Texto Correto. "+sym.terminalNames[i.sym]);
             
             
@@ -76,8 +80,12 @@ public class CompiladorJFlexCUP {
              
             }*/
             }catch(Exception e){
-                  System.out.println("Erro na entrada: "+e.getMessage());
-            } 
+                System.out.println("Erro na entrada: "+e.getMessage());              
+                
+            }catch(Error e){
+                 System.out.println("Erro na entrada: "+e.getMessage()); 
+            }
+       
 
         // Exemplo para testar o parser e léxico
        /*try{

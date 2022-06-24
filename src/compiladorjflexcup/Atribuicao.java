@@ -21,5 +21,7 @@ public class Atribuicao {
     public Identificador getId(){
         return this.id;
     }
+    
+    public Expressao getExpressao(){ return this.expressao;}
 
 }

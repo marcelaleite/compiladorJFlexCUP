@@ -42,7 +42,9 @@ import java_cup.runtime.ComplexSymbolFactory.Location;
         Location left = new Location(name,yyline+1,yycolumn+yylength()-buflength);
         Location right= new Location(name,yyline+1,yycolumn+yylength());
         Symbol s = symbolFactory.newSymbol(name, sym, left, right,val);
-        //System.out.println(s.toString());
+        System.out.println(s.toString());     
+        System.out.println("valor: "+val.toString());
+
         return s;
     }
 
@@ -109,8 +111,8 @@ ws = [ \r\n\t]+
 
 <STRING>{
 
-\" {string.setLength(0); yybegin(YYINITIAL);return symbol("str",STR,string.toString(),string.length()); }
-[^\n\r\"\\]+ {string.append(yytext());}
+\" { yybegin(YYINITIAL);System.out.println("str: "+string.toString()); return symbol("str",STR,string.toString(),string.length()); }
+[^\n\r\"\\]+                    { string.append(yytext());}
   \\t                            { string.append('\t'); }
   \\n                            { string.append('\n'); }
 
